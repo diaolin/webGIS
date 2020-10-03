@@ -1,0 +1,37 @@
+{
+  "id": "2050404",
+  "name": "webGIS",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "5651560",
+      "name": "正确",
+      "font_class": "zhengque",
+      "unicode": "e6a0",
+      "unicode_decimal": 59040
+    },
+    {
+      "icon_id": "984196",
+      "name": "用户名",
+      "font_class": "weibiaoti562",
+      "unicode": "e643",
+      "unicode_decimal": 58947
+    },
+    {
+      "icon_id": "5183661",
+      "name": "正确",
+      "font_class": "icon-test",
+      "unicode": "e656",
+      "unicode_decimal": 58966
+    },
+    {
+      "icon_id": "6129063",
+      "name": "28感叹号-圆框",
+      "font_class": "gantanhao-yuankuang",
+      "unicode": "e763",
+      "unicode_decimal": 59235
+    }
+  ]
+}
