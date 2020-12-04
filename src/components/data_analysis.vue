@@ -1,31 +1,96 @@
 <template>
     <div>
         <div class = "content5" style="display:flex;">
-        <div id = "left" style="width:300px;">
+        <div id = "left" style="width:300px;background:#DBF1FD;">
+            <countycheck/>
              <el-tree :data="dataTree"  show-checkbox default-expand-all node-key="label" ref="tree" highlight-current
-                    check-on-click-node :props="defaultProps" :check-strictly="true" :render-content="renderContent" :default-checked-keys='resourceCheckedKey' @check="getCheckedKeys">
+                    check-on-click-node :props="defaultProps" :check-strictly="true" :render-content="renderContent" :default-checked-keys='resourceCheckedKey' @check="getCheckedKeys" style="background:#DBF1FD">
             </el-tree>
         </div>
         <div id = "right" style="flex:1;">
-            <div id="map">
+            <div id="map" v-loading="loading">
                 <span>
-                    <el-button  type="primary" id="type" value="Polygon" @click="drawPolygon()">绘制</el-button>
+                    <!-- <el-button  type="primary" id="type" value="Polygon" @click="drawPolygon()">绘制</el-button>
                     <el-button  type="primary" id="type" value="None" @click="removePolygon()">清除绘制</el-button>
-                    <el-button  type="primary" id="type" value="None" @click="removeDraw()">取消绘制</el-button>
-                    <el-button type="primary" v-show="selectFea" @click="selectFeature()">选择要素</el-button>
-                    <el-button type="primary" v-show="!selectFea" disabled>选择要素</el-button>
-                    <el-button type="primary" v-show="feaChart" @click="addChart()">要素图表</el-button>
-                    <el-button type="primary" v-show="!feaChart" disabled>要素图表</el-button>
-                    <el-button type="primary" v-show="feature" @click="removeFea()">删除要素</el-button>
-                    <el-button type="primary" v-show="!feature" disabled>删除图表</el-button>
-                    <el-button type="primary" @click="Intersect()">相交</el-button>
-                    <el-button type="primary" @click="testcaijian()">测试</el-button>
+                    <el-button  type="primary" id="type" value="None" @click="removeDraw()">取消绘制</el-button> -->
+                    <!-- <el-button type="primary" @click="selectFeature()" :disabled="!selectFea">选择要素</el-button>
+                    <el-button type="primary"  @click="addChart()" :disabled="!feaChart">要素图表</el-button>
+                    <el-button type="primary"  @click="removeFea()" :disabled="!feature">删除要素</el-button> -->
+                    <!-- <el-button type="primary" @click="Intersect()">相交</el-button> -->
+                    <!-- <el-button type="primary" @click="testcaijian()">测试</el-button> -->
                 </span>
-                <el-button class="export" type="primary" @click="exportShp()">导出</el-button>
+                <!-- <el-button class="export" type="primary" @click="exportShp()">导出</el-button> -->
                 <div id="barline" v-show="barlineShow">
                 </div>
             </div>
-           
+            
+        </div>
+        <div class="xjmb" style="width:400px;">
+            <span style="margin-left:50px;margin-top:50px;">图层一：</span>
+            <!-- <el-select v-model="optionslayervalue" placeholder="请选择上传方式">
+                <el-option
+                v-for="item in optionslayer1"
+                :key="item.label"
+                :label="item.label"
+                :value="item.label">
+                </el-option>
+            </el-select> -->
+            <el-select v-model="optionslayer1value" placeholder="请选择上传图层">
+                <el-option-group
+                v-for="group in optionslayer1all"
+                :key="group.label"
+                :label="group.label">
+                <el-option
+                    v-for="item in group.options"
+                    :key="item.jx"
+                    :label="item.label"
+                    :value="item.jx">
+                </el-option>
+                </el-option-group>
+            </el-select>
+            <el-input v-model="circlewidth" placeholder="请输入缓冲半径(m)" v-show="drawPointShow" style="width:40%;margin-top:20px;margin-left:120px;"></el-input>
+            <el-input v-model="linewidth" placeholder="请输入缓冲距离(m)" v-show="drawLineShow" style="width:40%;margin-top:20px;margin-left:120px;"></el-input>
+            <div class="anaybutton" v-show="updatadrawshow">
+                 <el-button  type="primary"  @click="clearDraw()">清除</el-button>
+                 <el-button  type="primary"  @click="reDrawLayer()">重新绘制</el-button>
+            </div>
+            <div style="height:20px;">
+                <!-- <select id="insecttype"> -->
+                    <!-- <el-button  type="primary"  value="Point" @click="drawInsect()" v-show="drawPointShow">点击绘制点</el-button>
+                    <el-button  type="primary"  value="LineString" @click="drawInsect()" v-show="drawLineShow">点击绘制线</el-button>
+                    <el-button  type="primary"  value="Polygon" @click="drawInsect()" v-show="drawPolyShow">点击绘制面</el-button> -->
+                    <!-- <option  value="Point" @click="drawInsect()">点击绘制点</option >
+                    <option  value="LineString" @click="drawInsect()">点击绘制线</option>
+                    <option  value="Polygon" @click="drawInsect()">点击绘制面</option > -->
+                <!-- </select> -->
+            </div>
+            <!-- <div>
+                <select id="insecttype">
+                    <option value="Point">Point</option>
+                    <option value="LineString">LineString</option>
+                    <option value="Polygon">Polygon</option>
+                    <option value="Circle">Circle</option>
+                    <option value="None">None</option>
+                </select>
+            </div> -->
+            
+            <span style="margin-left:50px;">图层二：</span>
+            <el-select v-model="optionslayer2value" placeholder="请选择上传图层">
+                <el-option
+                v-for="item in optionslayer2"
+                :key="item.jx"
+                :label="item.label"
+                :value="item.jx">
+                </el-option>
+            </el-select>
+            <div class="anaybutton">
+                 <el-button  type="primary"  @click="insectLayer()">相交</el-button>
+                 <el-button  type="primary"  @click="exportshpLayer()">导出shp</el-button>
+            </div>
+            <div style="display: flex;justify-content: center;align-items: center;margin-top:20px;">
+                <img src="../assets/images/5.png">
+            </div>
+            
         </div>
         
         <!-- <el-container>
@@ -34,13 +99,11 @@
                     check-on-click-node :props="defaultProps" :check-strictly="true" :render-content="renderContent"  @check="getCheckedKeys">
                 </el-tree>
             </el-aside>
-
             <el-container>
                 <el-main>
                     <div id="map">
                     </div>
                 </el-main>
-                
             </el-container>
         </el-container> -->
         <!-- <div id="location"></div> -->
@@ -101,6 +164,10 @@
     import Polygon1 from "ol/geom/Polygon"
     import Feature1 from "ol/Feature"
     import array from '../assets/json/lvlvlv.json'
+    import countycheck from './countySelect'
+    import {
+        eventBus
+    } from '../main'
     export default {
         data() {
             return {
@@ -220,7 +287,7 @@
                         value:0,
                         label: '2019年监测图斑',
                         className:'iconfont icon-zhengque',
-                        jx:'511681sdjctb_2019'
+                        jx:'511681jctb_2019'
                     }, {
                         value:0,
                         label: '2018年监测图斑',
@@ -246,7 +313,7 @@
                         value:0,
                         label: '永久基本农田',
                         className:'iconfont icon-zhengque',
-                        jx:'jbntbhtb'
+                        jx:'5116812014jbntbhtb'
                     }, {
                         label: '部下发用地管理信息',
                         children: [{
@@ -266,12 +333,45 @@
                     }]
                     }
                 ],
+                optionslayer1:[
+                {
+                    jx: 'point',
+                    label: '绘制点'
+                }, {
+                    jx: 'line',
+                    label: '绘制线'
+                },{
+                    jx: 'polygon',
+                    label: '绘制面'
+                },{
+                    jx: 'file',
+                    label: '上传文件'
+                }],
+                optionslayer1value:'',
+                optionslayer2value:'',
+                insectvector:'',
+                insectdraw:'',
+                drawInsectPoint:'',
+                arrinsects:[],
+                drawPointShow:false,
+                drawLineShow:false,
+                drawPolyShow:false,
+                allleaflayers:[],
+                optionslayer1all:[],
+                optionslayer2:[],
+                insecttype:'',
+                circlewidth:'',
+                linewidth:'',
+                requestLayer:'',
+                loading: false,
+                countyValue:[],
+                updatadrawshow:false
             };
         },
         watch: {
             // 根据名称筛选部门树
             deptName(val) {
-            this.$refs.tree.filter(val);
+                this.$refs.tree.filter(val);
             },
             // 默认点击Tree第一个节点
             deptTreeData(val) {
@@ -280,15 +380,122 @@
                         document.querySelector('.el-tree-node__content').click()
                     })
                 }
+            },
+            optionslayer1value(value){
+                this.drawPointShow = false;
+                this.drawLineShow = false;
+                this.drawPolyShow = false;
+                this.barlineShow = false;
+                this.updatadrawshow = false;
+                this.map.removeInteraction(this.insectdraw);
+                this.map.removeLayer(this.insectvector);
+                this.map.removeLayer(this.requestLayer); 
+                switch(value){
+                    case 'point':
+                        this.drawPointShow = true;
+                        this.insecttype  = 'Point';
+                        this.drawInsect();
+                    break;
+                    case 'line':
+                        this.drawLineShow = true;
+                        this.insecttype  = 'LineString';
+                        this.drawInsect();
+                    break;
+                    case 'polygon':
+                        // this.drawPolyShow = true;
+                        this.insecttype  = 'Polygon';
+                        this.drawInsect();
+                    break;
+                    case '上传文件':
+                    break;
+                    default:
+                        console.log("剩余");      
+                }
+            },
+            optionslayer2value(value){
+                console.log("value2",value);
+            },
+            drawInsectPoint(val){
+                console.log("insectvector",val);
             }
+        },
+        created() {
+            eventBus.$off("username");
+            eventBus.$on('countyValue', (message) => {
+                console.log("countyValue134",message);
+                this.countyValue = message;
+                // window.sessionStorage.setItem('countyValue',message)
+            })
+        },
+        components: {
+            countycheck
         },
         mounted() {
             this.initMap();
             this.requestTree();
             this.defaultCheck();
+            this.getAllLeaf();
+            // this.drawInsect();
             // this.quchong();
         },
         methods: {
+            getAllLeaf(){
+                let arr = [],arr1 = [],arr2 = [],arr3 = [],arr4 = [],result = [];
+                for(let i in this.dataTree){
+                    if(this.dataTree[i].children.length > 0){
+                        arr1.push(this.dataTree[i].children);
+                    } else {
+                        arr.push(this.dataTree[i]);
+                    }
+                }
+                for(let i in arr1){
+                    for(let j in arr1[i]){
+                        if(arr1[i][j].children && arr1[i][j].children.length > 0){
+                            arr2.push(arr1[i][j].children);
+                        } else {
+                            arr.push(arr1[i][j]);
+                        }
+                    }
+                }
+                for(let i in arr2){
+                    for(let j in arr2[i]){
+                        if(arr2[i][j].children && arr2[i][j].children.length > 0){
+                            arr3.push(arr2[i][j].children);
+                        } else {
+                            arr.push(arr2[i][j]);
+                        }
+                    }
+                }
+                for(let i in arr3){
+                    for(let j in arr3[i]){
+                        if(arr3[i][j].children && arr3[i][j].children.length > 0){
+                            arr4.push(arr3[i][j].children);
+                        } else {
+                            arr.push(arr3[i][j]);
+                        }
+                    }
+                }
+                for(let i in arr4){
+                    arr.push(arr4[i]);
+                }
+                for(let i in arr){
+                    if(arr[i].className === 'iconfont icon-zhengque' && arr[i].jx !== '511681PL1+GF2DOM011'){
+                        result.push(arr[i]);
+                    }
+                }
+                this.allleaflayers = result;
+                this.optionslayer2 = result;
+                let obj = {
+                    label:'自定义图层',
+                    options: this.optionslayer1
+                }
+                this.optionslayer1all.push(obj);
+                let obj1 = {
+                    label:'已有图层',
+                    options:result
+                }
+                this.optionslayer1all.push(obj1);
+            },
             defaultProps() {
 
             },
@@ -297,6 +504,59 @@
                 //     // treeBox 元素的ref   value 绑定的node-key
                 //     this.$refs.tree.setChecked('dltb',true); 
                 // });
+            },
+            drawInsect(){
+                let source = new VectorSource({
+                    wrapX:false,
+                    params: {
+                                'LAYERS': 'draw',
+                                 // 'TILED': true,
+                                'VERSION': '1.1.1',
+                                // 'BBOX': this.extent,
+                                // 'SRS': 'EPSG:4524',
+                                // "exceptions": 'application/vnd.ogc.se_inimage',
+                                // 'env':'color:red;'
+                                //'sld': "http://192.168.100.115:8080/111/cccccsld.sld"
+                            },
+                });
+                //ol.layer.Vector用于显示在客户端渲染的矢量数据。
+                this.insectvector = new VectorLayer({
+                    source:source
+                });
+                let that = this;
+                let typeSelect = document.getElementById('insecttype');
+                // let draw;
+                function addInteraction() {
+                    // let value = typeSelect.value;
+                    let value = that.insecttype;
+                    if(value !== 'None'){
+                        that.insectdraw = new Draw({
+                            source:source,
+                            type: that.insecttype
+                        });
+                        that.map.addInteraction(that.insectdraw);
+                        that.insectdraw.on('drawend',function(evt){
+                            that.map.removeInteraction(that.insectdraw);
+                            that.updatadrawshow = true;
+                            // that.map.removeLayer(this.insectvector);
+                            let feature=evt.feature;
+                            let geometry=feature.getGeometry();
+                            let coordinate=geometry.getCoordinates();
+                            that.drawInsectPoint = coordinate;
+                            that.geometry = geometry;
+                        })
+                    }
+                }
+                that.map.addLayer(this.insectvector);
+                addInteraction();
+                that.drawPoint = that.insectdraw.sketchLineCoords_;
+            },
+            clearDraw(){
+                this.map.removeLayer(this.insectvector);
+            },
+            reDrawLayer(){
+                this.map.removeLayer(this.insectvector);
+                this.drawInsect();
             },
             quchong(){
                 var arr = [];
@@ -368,7 +628,7 @@
                     let fileName = this.allNode[i].label;
                     let fileJx = this.allNode[i].jx;
                     let url =
-                        'http://192.168.100.115:8080/geoserver/WebLayer/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=WebLayer:' +
+                        this.$store.state.ConfigBaseURL+'geoserver/WebGisdl/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=WebGisdl:' +
                         fileJx + '&outputFormat=SHAPE-ZIP';
                     axios({
                         method: 'GET',
@@ -447,13 +707,13 @@
             },
             addMapLayer(layer,value){
                 this.selectFea = false;
-                let layerName = 'WebLayer:'+layer;
+                let layerName = 'WebGisdl:'+layer;
                 this.allLayer = [];
                 let selectlayer = 
                     new TileLayer({
                         //extent:extent, //可注释
                         source: new TileWMS({
-                            url: 'http://192.168.100.115:8080/geoserver/WebLayer/wms',
+                            url: this.$store.state.ConfigBaseURL+'geoserver/WebGisdl/wms',
                             params: {
                                 'LAYERS': layerName,
                                  // 'TILED': true,
@@ -498,7 +758,7 @@
                     new TileLayer({
                         //extent:extent, //可注释
                         source: new TileWMS({
-                            url: 'http://192.168.100.115:8080/geoserver/dlTest/wms',
+                            url: this.$store.state.ConfigBaseURL+'geoserver/dlTest/wms',
                             params: {
                                 'LAYERS': 'dlTest:cccc',
                                 // 'TILED': true,
@@ -517,9 +777,9 @@
                     new TileLayer({
                         //extent:extent, //可注释
                         source: new TileWMS({
-                            url: 'http://192.168.100.115:8080/geoserver/WebLayer/wms',
+                            url: this.$store.state.ConfigBaseURL+'geoserver/WebGisdl/wms',
                             params: {
-                                'LAYERS': 'WebLayer:511681PL1+GF2DOM011',
+                                'LAYERS': 'WebGisdl:511681PL1+GF2DOM011',
                                 // 'TILED': true,
                                 'VERSION': '1.1.1',
                                 'BBOX': this.extent,
@@ -532,7 +792,7 @@
                         })
                     })
                 ];
-                 this.layer[0].set("name",'WebLayer:511681PL1+GF2DOM011');
+                 this.layer[0].set("name",'WebGisdl:511681PL1+GF2DOM011');
                 
                 this.map = new Map({
                     // controls: defaultControls().extend([scaleControl()]),
@@ -605,6 +865,7 @@
                 // let draw;
                 function addInteraction() {
                     let value = typeSelect.value;
+                    console.log("valuellll",value);
                     if(value !== 'None'){
                         that.draw = new Draw({
                             source:source,
@@ -625,7 +886,7 @@
                     }
                 }
                 
-                that.map.addLayer( this.vector);
+                that.map.addLayer(this.vector);
                 console.log("vector", this.vector);
                 addInteraction();
                 that.drawPoint = that.draw.sketchLineCoords_;
@@ -644,16 +905,17 @@
                 console.log("this.drawPoint",this.drawPoint);
                 let arrpoint1;
                 for(let i in this.drawPoint){
+                    console.log("this.drawPoint[i]",this.drawPoint[i]);
                     arrpoint1 = this.drawPoint[i].join('%20');
                 }
                 let test = this.geometry;
-            
                 let arrpoint = arrpoint1;
                 console.log("arrpoint",arrpoint);
                 let wfsVectorSource = new VectorSource({
                     format: new GeoJSON(),
-                    url: 'http://192.168.100.115:8080/geoserver/WebLayer/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=WebLayer%3Adltb%20&outputFormat=application%2Fjson%20&filter=%20%3CFilter%20xmlns=%22http://www.opengis.net/ogc%22%20xmlns:gml=%22http://www.opengis.net/gml%22%3E%20%3CIntersects%3E%20%3CPropertyName%3Eshape%3C/PropertyName%3E%20%3Cgml:Polygon%3E%20%3Cgml:outerBoundaryIs%3E%20%3Cgml:LinearRing%3E%20%3Cgml:coordinates%3E'+arrpoint+'%3C/gml:coordinates%3E%20%3C/gml:LinearRing%3E%20%3C/gml:outerBoundaryIs%3E%20%3C/gml:Polygon%3E%20%3C/Intersects%3E%20%3C/Filter%3E',
+                    url: this.$store.state.ConfigBaseURL+'geoserver/WebGisdl/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=WebGisdl%3Adltb%20&outputFormat=application%2Fjson%20&filter=%20%3CFilter%20xmlns=%22http://www.opengis.net/ogc%22%20xmlns:gml=%22http://www.opengis.net/gml%22%3E%20%3CIntersects%3E%20%3CPropertyName%3Eshape%3C/PropertyName%3E%20%3Cgml:Polygon%3E%20%3Cgml:outerBoundaryIs%3E%20%3Cgml:LinearRing%3E%20%3Cgml:coordinates%3E'+arrpoint+'%3C/gml:coordinates%3E%20%3C/gml:LinearRing%3E%20%3C/gml:outerBoundaryIs%3E%20%3C/gml:Polygon%3E%20%3C/Intersects%3E%20%3C/Filter%3E',
                     strategy: bbox,
+                    overlaps:false
                     // filter: new Intersects('draw',test)
                 });
                 //创建wfs图层，注意需要设置好描边样式，否则不展示效果出来
@@ -684,27 +946,46 @@
                 //     }
                 // },3000)
             },
-           addChart(){
+           addChart(resdata){
                 let arrFea = [];
                 let arrchart = [],arrdl = [],arrdlmj = [],arrtbs = [];
-                for(let item in this.testdata){
-                    arrFea.push(this.testdata[item]);
-                }
+                // for(let item in this.testdata){
+                //     arrFea.push(this.testdata[item]);
+                // }
+                // for(let i in resdata){
+
+                // }
                 // for(let i in arrFea){
                 //     if(!arrmc.includes(arrFea[i].values_.dlmc)){
                 //         arrmc.push(arrFea[i].values_.dlmc);
                 //     }
                 // }
+                console.log("arrFAFSTAD",resdata);
+                for(let i in resdata){
+                    arrFea.push(resdata[i].properties);
+                }
+                // let arrdata = arrFea.reduce((obj,item) => {
+                //     let find = obj.find(i => i.values_.dlmc === item.values_.dlmc)
+                //     let _d = {
+                //         ...item,
+                //         count:1,
+                //         name:item.values_.dlmc,
+                //         area:item.values_.tbdlmj
+                //     }
+                //     find?find.count++:obj.push(_d)
+                //     find?find.area += item.values_.tbdlmj:obj.push(_d)
+                //     return obj;
+                // },[]);
                 let arrdata = arrFea.reduce((obj,item) => {
-                    let find = obj.find(i => i.values_.dlmc === item.values_.dlmc)
+                    let find = obj.find(i => i['511681dltb_dlmc'] === item['511681dltb_dlmc'])
                     let _d = {
                         ...item,
                         count:1,
-                        name:item.values_.dlmc,
-                        area:item.values_.tbdlmj
+                        name:item['511681dltb_dlmc'],
+                        area:item['511681dltb_tbdlmj']
                     }
                     find?find.count++:obj.push(_d)
-                    find?find.area += item.values_.tbdlmj:obj.push(_d)
+                    find?find.area += item['511681dltb_tbdlmj']:obj.push(_d)
                     return obj;
                 },[]);
                 for(let i = 0;i < arrdata.length;i += 2){
@@ -807,8 +1088,6 @@
                         xAxisIndex: 1,
                         color:'green',
                         data: arrtbs,
-                        // barWidth:10,
-                        // color:'rgba(28, 124, 197)'
                     }
                 ]
                 })
@@ -817,67 +1096,180 @@
                 this.barlineShow = false;
                 this.map.removeLayer(this.wfsVectorLayer);
             },
-            testcaijian(){
-                let wfsVectorSource = new VectorSource({
-                    format: new GeoJSON(),
-                    projection: 'EPSG:4524',
-                    url: 'http://192.168.100.115:8080/geoserver/WebLayer/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=WebLayer%3Adltb&outputFormat=application%2Fjson',
-                    strategy: bbox
-                });
-                //创建wfs图层，注意需要设置好描边样式，否则不展示效果出来
-                let wfsVectorLayer = new VectorLayer({
-                    source: wfsVectorSource,
-                    style: new Style({
-                        fill: new Fill({ //矢量图层填充颜色，以及透明度
-                            color: 'rgba(28, 124, 197, 0.5)'
-                        }),
-                        stroke: new Stroke({
-                            color: 'rgba(28, 124, 197, 0.7)',
-                            width: 1
-                        })
-                    }),
-                    visible: true
-                });
-                var styles = {
-                    'route' : new Style({
-                        stroke : new Stroke({
-                            width : 3,
-                            color : [ 237, 212, 0, 0.8 ]
-                        }),
-                        fill : new Fill({
-                            color : 'red'
-                        })
-                    }),
-                    'flag' : new Style({
-                        image : new Icon({
-                            src : 'images/flag_rightgreen_.png',
-                            //  anchor: [0, 0],
-                            scale : 0.3
-                        })
-                    }),
+            insectPre(type){
+                let updata,str = [];
+                if(this.optionslayer1value === '' || this.optionslayer2value === ''){
+                    this.$message({
+                        message: '请先选择两个图层',
+                        type: 'warning'
+                    });
+                    this.loading  = false;
+                    return;
+                }
+                if(this.optionslayer1value === 'point'){
+                    if(this.circlewidth === ''){
+                        this.$message({
+                            message: '请先输入缓冲半径',
+                            type: 'warning'
+                        });
+                        this.loading  = false;
+                        return;
+                    }
+                    if(this.drawInsectPoint === ''){
+                        this.$message({
+                            message: '请先在地图上绘制点',
+                            type: 'warning'
+                        });
+                        this.loading  = false;
+                        return;
+                    }
+                }
+                if(this.optionslayer1value === 'line'){
+                    if(this.linewidth === ''){
+                        this.$message({
+                            message: '请先输入缓冲的距离',
+                            type: 'warning'
+                        });
+                        this.loading  = false;
+                        return;
+                    }
+                    if(this.drawInsectPoint === ''){
+                        this.$message({
+                            message: '请先在地图上绘制线',
+                            type: 'warning'
+                        });
+                        this.loading  = false;
+                        return;
+                    }
+                }
+               
+                if(this.optionslayer1value === 'polygon'){
+                    if(this.drawInsectPoint === ''){
+                        this.$message({
+                            message: '请先在地图上绘制面',
+                            type: 'warning'
+                        });
+                        this.loading  = false;
+                        return;
+                    }
+                    for(let i in this.drawInsectPoint[0]){
+                        str += '['+this.drawInsectPoint[0][i]+'],';
+                    }
+                    str = str.substring(0,str.length-1)
                 }
 
-                this.map.addLayer(wfsVectorLayer);
-                let params = '<?xml version="1.0" encoding="UTF-8"?>'+'<wps:Execute version="1.0.0" service="WPS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.opengis.net/wps/1.0.0" xmlns:wfs="http://www.opengis.net/wfs" xmlns:wps="http://www.opengis.net/wps/1.0.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc" xmlns:wcs="http://www.opengis.net/wcs/1.1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsAll.xsd"> <ows:Identifier>JTS:intersection</ows:Identifier> <wps:DataInputs> <wps:Input> <ows:Identifier>a</ows:Identifier> <wps:Data> <wps:ComplexData mimeType="application/wkt"><![CDATA[POLYGON ((36378672.07427999 3362936.3031127225, 36381444.82124698 3362298.667921707,36378546.479469635 3361100.6866537384, 36378218.00073487 3362540.1964031523,36378218.00073487 3362540.1964031523))]]></wps:ComplexData> </wps:Data> </wps:Input> <wps:Input> <ows:Identifier>b</ows:Identifier> <wps:Reference mimeType="text/xml; subtype=gml/3.1.1" xlink:href="http://192.168.100.115:8080/geoserver/WebLayer/ows?service=WFS&amp;version=1.0.0&amp;request=GetFeature&amp;typeName=WebLayer%3Adltb&amp;outputFormat=gml3" method="GET"/> </wps:Input> </wps:DataInputs> <wps:ResponseForm> <wps:RawDataOutput mimeType="text/xml; subtype=gml/3.1.1"> <ows:Identifier>result</ows:Identifier> </wps:RawDataOutput> </wps:ResponseForm> </wps:Execute>';
-                axios({
-                    type : 'post',
-                    // method: 'POST',
-                    url: 'http://192.168.100.115:8080/geoserver/ows?service=WPS&version=1.0.0',
-                    contentType : 'text/xml',
-                    data:params,
-                    // responseType: 'blob',
-                }).then(response => {
-                    if (response.type == "Polygon") {//如果几何图形是多边形,则调用，后续有更多需求再添加
-						var route = new Polygon1(response.coordinates);
-					}
- 
-					var routeFeature = new Feature1({
-						geometry : route
-					})
-					
-					routeFeature.setStyle(styles.route);
-					wfsVectorSource.getSource().addFeature(routeFeature);
-                }).catch(error => console.log("fail"))
+                switch(this.optionslayer1value){
+                    case 'point':
+                        updata = '<?xml version="1.0" encoding="UTF-8"?><wps:Execute version="1.0.0" service="WPS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.opengis.net/wps/1.0.0" xmlns:wfs="http://www.opengis.net/wfs" xmlns:wps="http://www.opengis.net/wps/1.0.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc" xmlns:wcs="http://www.opengis.net/wcs/1.1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsAll.xsd"> <ows:Identifier>JTS:buffer</ows:Identifier> <wps:DataInputs> <wps:Input> <ows:Identifier>geom</ows:Identifier> <wps:Data> <wps:ComplexData mimeType="application/wkt"><![CDATA[POINT('+this.drawInsectPoint[0]+' '+ this.drawInsectPoint[1]+')]]></wps:ComplexData> </wps:Data> </wps:Input> <wps:Input> <ows:Identifier>distance</ows:Identifier> <wps:Data> <wps:LiteralData>'+this.circlewidth+'</wps:LiteralData> </wps:Data> </wps:Input> <wps:Input> <ows:Identifier>capStyle</ows:Identifier> <wps:Data> <wps:LiteralData>Round</wps:LiteralData> </wps:Data> </wps:Input> </wps:DataInputs> <wps:ResponseForm> <wps:RawDataOutput mimeType="application/json"> <ows:Identifier>result</ows:Identifier> </wps:RawDataOutput> </wps:ResponseForm> </wps:Execute>';
+                    break;
+                    case 'line':
+                        updata = '<?xml version="1.0" encoding="UTF-8"?><wps:Execute version="1.0.0" service="WPS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.opengis.net/wps/1.0.0" xmlns:wfs="http://www.opengis.net/wfs" xmlns:wps="http://www.opengis.net/wps/1.0.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc" xmlns:wcs="http://www.opengis.net/wcs/1.1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsAll.xsd"> <ows:Identifier>JTS:buffer</ows:Identifier> <wps:DataInputs> <wps:Input> <ows:Identifier>geom</ows:Identifier> <wps:Data> <wps:ComplexData mimeType="application/wkt"><![CDATA[LINESTRING('+this.drawInsectPoint[0][0]+' '+this.drawInsectPoint[0][1]+','+this.drawInsectPoint[1][0]+' '+this.drawInsectPoint[1][1]+ ')]]></wps:ComplexData> </wps:Data> </wps:Input> <wps:Input> <ows:Identifier>distance</ows:Identifier> <wps:Data> <wps:LiteralData>'+this.linewidth+'</wps:LiteralData> </wps:Data> </wps:Input> <wps:Input> <ows:Identifier>capStyle</ows:Identifier> <wps:Data> <wps:LiteralData>Round</wps:LiteralData> </wps:Data> </wps:Input> </wps:DataInputs> <wps:ResponseForm> <wps:RawDataOutput mimeType="application/json"> <ows:Identifier>result</ows:Identifier> </wps:RawDataOutput> </wps:ResponseForm> </wps:Execute>';
+                    break;
+                    case 'polygon':
+                        updata = '<?xml version="1.0" encoding="UTF-8"?><wps:Execute version="1.0.0" service="WPS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.opengis.net/wps/1.0.0" xmlns:wfs="http://www.opengis.net/wfs" xmlns:wps="http://www.opengis.net/wps/1.0.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc" xmlns:wcs="http://www.opengis.net/wcs/1.1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsAll.xsd"> <ows:Identifier>vec:IntersectionFeatureCollection</ows:Identifier> <wps:DataInputs> <wps:Input> <ows:Identifier>first feature collection</ows:Identifier> <wps:Data> <wps:ComplexData mimeType="application/json"><![CDATA[{"type":"FeatureCollection","crs":{"type":"name","properties":{"name":"EPSG:4524"}},"features":[{"type":"Feature","geometry":{"type":"Polygon","coordinates":[['+str+']]},"properties":{},"id":"fid-7c1c5c9d_175afb25bab_-7fff"}]}]]></wps:ComplexData> </wps:Data> </wps:Input> <wps:Input> <ows:Identifier>second feature collection</ows:Identifier> <wps:Reference mimeType="text/xml" xlink:href="http://geoserver/wfs" method="POST"> <wps:Body> <wfs:GetFeature service="WFS" version="1.0.0" outputFormat="GML2" xmlns:WebGisdl="http://WebGisdl"> <wfs:Query typeName="WebGisdl:'+this.optionslayer2value+'"/> </wfs:GetFeature> </wps:Body> </wps:Reference> </wps:Input> <wps:Input> <ows:Identifier>intersectionMode</ows:Identifier> <wps:Data> <wps:LiteralData>INTERSECTION</wps:LiteralData> </wps:Data> </wps:Input> </wps:DataInputs> <wps:ResponseForm> <wps:RawDataOutput mimeType="application/'+type+'"> <ows:Identifier>result</ows:Identifier> </wps:RawDataOutput> </wps:ResponseForm> </wps:Execute>';
+                    break;
+                    case 'file':
+                    break;
+                    default:
+                        updata = '<?xml version="1.0" encoding="UTF-8"?><wps:Execute version="1.0.0" service="WPS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.opengis.net/wps/1.0.0" xmlns:wfs="http://www.opengis.net/wfs" xmlns:wps="http://www.opengis.net/wps/1.0.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc" xmlns:wcs="http://www.opengis.net/wcs/1.1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsAll.xsd"> <ows:Identifier>vec:IntersectionFeatureCollection</ows:Identifier> <wps:DataInputs> <wps:Input> <ows:Identifier>first feature collection</ows:Identifier> <wps:Reference mimeType="text/xml" xlink:href="http://geoserver/wfs" method="POST"> <wps:Body> <wfs:GetFeature service="WFS" version="1.0.0" outputFormat="GML2" xmlns:WebGisdl="http://WebGisdl"> <wfs:Query typeName="WebGisdl:'+this.optionslayer1value+'"/> </wfs:GetFeature> </wps:Body> </wps:Reference> </wps:Input> <wps:Input> <ows:Identifier>second feature collection</ows:Identifier> <wps:Reference mimeType="text/xml" xlink:href="http://geoserver/wfs" method="POST"> <wps:Body> <wfs:GetFeature service="WFS" version="1.0.0" outputFormat="GML2" xmlns:WebGisdl="http://WebGisdl"> <wfs:Query typeName="WebGisdl:'+this.optionslayer2value+'"/> </wfs:GetFeature> </wps:Body> </wps:Reference> </wps:Input> <wps:Input> <ows:Identifier>intersectionMode</ows:Identifier> <wps:Data> <wps:LiteralData>INTERSECTION</wps:LiteralData> </wps:Data> </wps:Input> </wps:DataInputs> <wps:ResponseForm> <wps:RawDataOutput mimeType="application/'+type+'"> <ows:Identifier>result</ows:Identifier> </wps:RawDataOutput> </wps:ResponseForm> </wps:Execute>';
+                }
+                return updata;
+            },
+            insectLayer(){
+                this.map.removeLayer(this.requestLayer); 
+                let updata = this.insectPre('json');
+                let str1 = [];
+                this.loading  = true;
+                if(this.optionslayer1value === 'point' || this.optionslayer1value === 'line'){
+                    this.instance.regist(updata).then(res => {
+                        for(let i in res.data.coordinates[0]){
+                            str1 += '['+res.data.coordinates[0][i]+'],';
+                        }
+                        str1 = str1.substring(0,str1.length-1)
+                        let polydata = '<?xml version="1.0" encoding="UTF-8"?><wps:Execute version="1.0.0" service="WPS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.opengis.net/wps/1.0.0" xmlns:wfs="http://www.opengis.net/wfs" xmlns:wps="http://www.opengis.net/wps/1.0.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc" xmlns:wcs="http://www.opengis.net/wcs/1.1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsAll.xsd"> <ows:Identifier>vec:IntersectionFeatureCollection</ows:Identifier> <wps:DataInputs> <wps:Input> <ows:Identifier>first feature collection</ows:Identifier> <wps:Data> <wps:ComplexData mimeType="application/json"><![CDATA[{"type":"FeatureCollection","crs":{"type":"name","properties":{"name":"EPSG:4524"}},"features":[{"type":"Feature","geometry":{"type":"Polygon","coordinates":[['+str1+']]},"properties":{},"id":"fid-7c1c5c9d_175afb25bab_-7fff"}]}]]></wps:ComplexData> </wps:Data> </wps:Input> <wps:Input> <ows:Identifier>second feature collection</ows:Identifier> <wps:Reference mimeType="text/xml" xlink:href="http://geoserver/wfs" method="POST"> <wps:Body> <wfs:GetFeature service="WFS" version="1.0.0" outputFormat="GML2" xmlns:WebGisdl="http://WebGisdl"> <wfs:Query typeName="WebGisdl:'+this.optionslayer2value+'"/> </wfs:GetFeature> </wps:Body> </wps:Reference> </wps:Input> <wps:Input> <ows:Identifier>intersectionMode</ows:Identifier> <wps:Data> <wps:LiteralData>INTERSECTION</wps:LiteralData> </wps:Data> </wps:Input> </wps:DataInputs> <wps:ResponseForm> <wps:RawDataOutput mimeType="application/json"> <ows:Identifier>result</ows:Identifier> </wps:RawDataOutput> </wps:ResponseForm> </wps:Execute>';
+                        this.requestinsect(polydata);
+                    }).catch((error) => {
+                        this.loading  = false;
+                        this.$message.error('相交失败');
+                    });
+                } else if(this.optionslayer1value === 'file') {
+                    console.log("");
+                } else {
+                    this.requestinsect(updata);
+                }
+            },
+            requestinsect(updata){
+                this.instance.regist(updata).then(res => {
+                    console.log("res",res);
+                    let source = new VectorSource({
+                        features: new GeoJSON().readFeatures(res.data),
+                    });
+                    let styles = [
+                        new Style({
+                            stroke: new Stroke({
+                                color: 'green',
+                                width: 1,
+                            }),
+                            fill: new Fill({
+                                color: 'rgba(28, 124, 197, 0.5)',
+                            }),
+                        })
+                    ]
+                    this.requestLayer = new VectorLayer({
+                        source: source,
+                        style: styles,
+                    });
+                    this.map.addLayer(this.requestLayer); 
+                    this.loading  = false;
+                    if(this.optionslayer1value === '511681dltb' || this.optionslayer2value === '511681dltb'){
+                        this.addChart(res.data.features);
+                    }
+                }).catch((error) => {
+                    this.loading  = false;
+                    this.$message.error('相交失败');
+                });
+            },
+            exportshpLayer(){
+                let updata = this.insectPre('zip');
+                let str1 = [];
+                this.loading  = true;
+                if(this.optionslayer1value === 'point' || this.optionslayer1value === 'line'){
+                    this.instance.regist(updata).then(res => {
+                        console.log("res.data.coordinates[0]",res.data.coordinates[0]);
+                        for(let i in res.data.coordinates[0]){
+                            str1 += '['+res.data.coordinates[0][i]+'],';
+                        }
+                        str1 = str1.substring(0,str1.length-1)
+                        let polydata = '<?xml version="1.0" encoding="UTF-8"?><wps:Execute version="1.0.0" service="WPS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.opengis.net/wps/1.0.0" xmlns:wfs="http://www.opengis.net/wfs" xmlns:wps="http://www.opengis.net/wps/1.0.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc" xmlns:wcs="http://www.opengis.net/wcs/1.1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsAll.xsd"> <ows:Identifier>vec:IntersectionFeatureCollection</ows:Identifier> <wps:DataInputs> <wps:Input> <ows:Identifier>first feature collection</ows:Identifier> <wps:Data> <wps:ComplexData mimeType="application/json"><![CDATA[{"type":"FeatureCollection","crs":{"type":"name","properties":{"name":"EPSG:4524"}},"features":[{"type":"Feature","geometry":{"type":"Polygon","coordinates":[['+str1+']]},"properties":{},"id":"fid-7c1c5c9d_175afb25bab_-7fff"}]}]]></wps:ComplexData> </wps:Data> </wps:Input> <wps:Input> <ows:Identifier>second feature collection</ows:Identifier> <wps:Reference mimeType="text/xml" xlink:href="http://geoserver/wfs" method="POST"> <wps:Body> <wfs:GetFeature service="WFS" version="1.0.0" outputFormat="GML2" xmlns:WebGisdl="http://WebGisdl"> <wfs:Query typeName="WebGisdl:'+this.optionslayer2value+'"/> </wfs:GetFeature> </wps:Body> </wps:Reference> </wps:Input> <wps:Input> <ows:Identifier>intersectionMode</ows:Identifier> <wps:Data> <wps:LiteralData>INTERSECTION</wps:LiteralData> </wps:Data> </wps:Input> </wps:DataInputs> <wps:ResponseForm> <wps:RawDataOutput mimeType="application/zip"> <ows:Identifier>result</ows:Identifier> </wps:RawDataOutput> </wps:ResponseForm> </wps:Execute>';
+                        this.requestinsectzip(polydata);
+                    }).catch((error) =>{
+                        this.loading  = false;
+                        this.$message.error('相交失败');
+                    });
+                } else if(this.optionslayer1value === 'file'){
+                    console.log('');
+                } else{
+                    this.requestinsectzip(updata);
+                }
+                
+            },
+            requestinsectzip(updata){
+                let fileName = 'InsectLayer';
+                this.instanceget.download(updata).then(res => {
+                    let blob = new Blob([res.data], {
+                            type: 'application/zip'
+                        })
+                    let link = document.createElement('a')
+                    link.href = window.URL.createObjectURL(blob)
+                    link.download = fileName
+                    link.click()
+                    //释放内存
+                    window.URL.revokeObjectURL(link.href) 
+                    this.loading  = false;
+                }).catch((error) => {
+                    this.loading  = false;
+                    this.$message.error('导出失败');
+                });
             }
         },
         
@@ -939,5 +1331,19 @@
         .el-checkbox__input> .el-checkbox__inner {
             display:none;
         }
+    }
+
+    .xjmb{
+        border: 1px solid #F3F4F4;
+        background-clip: padding-box;
+        box-shadow: 0 1px 1px #F3F4F4;
+        background: #F3F4F4;
+        border-radius: 5px;
+        position:relative;
+        margin-left: 10px;
+    }
+    .anaybutton{
+        text-align:center;
+        margin-top:20px;
     }
 </style>

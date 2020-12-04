@@ -1,0 +1,191 @@
+[
+    {
+        "id": 1,
+        "name": "成都",
+        "lng": 104.07447,
+        "lat": 30.584715,
+        "point": [104.07447,30.584715],
+        "idname": "css_animation0",
+        "classname": "css_animation"
+    },
+    {
+        "id": 2,
+        "name": "广元",
+        "lng": 105.851856,
+        "lat": 32.441861,
+        "point": [105.851856,32.441861],
+        "idname": "css_animation1",
+        "classname": "css_animation"
+    },
+    {
+        "id": 3,
+        "name": "巴中",
+        "lng": 106.753019,
+        "lat": 31.875097,
+        "point": [106.753019,31.875097],
+        "idname": "css_animation2",
+        "classname": "css_animation"
+    },
+    {
+        "id": 4,
+        "name": "达州",
+        "lng": 107.476604,
+        "lat": 31.215542,
+        "point": [107.476604,31.215542],
+        "idname": "css_animation3",
+        "classname": "css_animation"
+    },
+    {
+        "id": 5,
+        "name": "绵阳",
+        "lng": 104.686422,
+        "lat": 31.473909,
+        "point": [104.686422,31.473909],
+        "idname": "css_animation4",
+        "classname": "css_animation"
+    },
+    {
+        "id": 6,
+        "name": "南充",
+        "lng": 106.118366,
+        "lat": 30.845023,
+        "point": [106.118366,30.845023],
+        "idname": "css_animation5",
+        "classname": "css_animation"
+    },
+    {
+        "id": 7,
+        "name": "广安",
+        "lng": 106.639267,
+        "lat": 30.462494,
+        "point": [106.639267,30.462494],
+        "idname": "css_animation6",
+        "classname": "css_animation"
+    },
+    {
+        "id": 8,
+        "name": "德阳",
+        "lng": 104.405279,
+        "lat": 31.132869,
+        "point": [104.405279,31.132869],
+        "idname": "css_animation7",
+        "classname": "css_animation"
+    },
+    {
+        "id": 9,
+        "name": "遂宁",
+        "lng": 105.600861,
+        "lat": 30.540341,
+        "point": [105.600861,30.540341],
+        "idname": "css_animation8",
+        "classname": "css_animation"
+    },
+    {
+        "id": 10,
+        "name": "资阳",
+        "lng": 104.633575,
+        "lat": 30.135706,
+        "point": [104.633575,30.135706],
+        "idname": "css_animation9",
+        "classname": "css_animation"
+    },
+    {
+        "id": 11,
+        "name": "眉山",
+        "lng": 103.855705,
+        "lat": 30.082277,
+        "point": [103.855705,30.082277],
+        "idname": "css_animation10",
+        "classname": "css_animation"
+    },
+    {
+        "id": 12,
+        "name": "内江",
+        "lng": 105.063729,
+        "lat": 29.586137,
+        "point": [105.063729,29.586137],
+        "idname": "css_animation11",
+        "classname": "css_animation"
+    },
+    {
+        "id": 13,
+        "name": "泸州",
+        "lng": 105.447664,
+        "lat": 28.879439,
+        "point": [105.447664,28.879439],
+        "idname": "css_animation12",
+        "classname": "css_animation"
+    },
+    {
+        "id": 14,
+        "name": "雅安",
+        "lng": 103.049252,
+        "lat": 30.018043,
+        "point": [103.049252,30.018043],
+        "idname": "css_animation13",
+        "classname": "css_animation"
+    },
+    {
+        "id": 15,
+        "name": "乐山",
+        "lng": 103.772253,
+        "lat": 29.558694,
+        "point": [103.772253,29.558694],
+        "idname": "css_animation14",
+        "classname": "css_animation"
+    },
+    {
+        "id": 16,
+        "name": "宜宾",
+        "lng": 104.650265,
+        "lat": 28.757754,
+        "point": [104.650265,28.757754],
+        "idname": "css_animation15",
+        "classname": "css_animation"
+    },
+    {
+        "id": 17,
+        "name": "自贡",
+        "lng": 104.784732,
+        "lat": 29.345333,
+        "point": [104.784732,29.345333],
+        "idname": "css_animation16",
+        "classname": "css_animation"
+    },
+    {
+        "id": 18,
+        "name": "凉山",
+        "lng": 102.273215,
+        "lat": 27.887497,
+        "point": [102.273215,27.887497],
+        "idname": "css_animation17",
+        "classname": "css_animation"
+    },
+    {
+        "id": 19,
+        "name": "甘孜",
+        "lng": 101.969982,
+        "lat": 30.054528,
+        "point": [101.969982,30.054528],
+        "idname": "css_animation18",
+        "classname": "css_animation"
+    },
+    {
+        "id": 20,
+        "name": "阿坝",
+        "lng": 102.234003,
+        "lat": 31.912623,
+        "point": [102.234003,31.912623],
+        "idname": "css_animation19",
+        "classname": "css_animation"
+    },
+    {
+        "id": 21,
+        "name": "攀枝花",
+        "lng": 101.725256,
+        "lat": 26.587259,
+        "point": [101.725256,26.587259],
+        "idname": "css_animation20",
+        "classname": "css_animation"
+    }
+]

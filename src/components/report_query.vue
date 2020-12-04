@@ -72,7 +72,7 @@ export default {
     },
     data(){
         return{
-            countyValue:['51','5116','511681'],
+            countyValue:[],
             datatypeValue:'土地利用现状分类面积汇总表',
             datayearValue:'2019',
             optionscounty:[],
@@ -96,6 +96,7 @@ export default {
         // selectreport
     },
     mounted(){
+        this.countyValue = ['51','5116','511681'];
         this.requestCounty();
         this.requestDataType();
         // this.initExcel();
@@ -154,7 +155,6 @@ export default {
                     };
                     that.optionsdatatype.push(obj);
                 }
-                console.log("that.optionsdatatype",that.optionsdatatype);
             }).catch(err=>{
                 console.log("失败");
             });

@@ -1,0 +1,370 @@
+[
+    {
+        "label": "objectid",
+        "value": "编号"
+    },
+    {
+        "label": "bsm",
+        "value": "标识码"
+    },
+    {
+        "label": "ysdm",
+        "value": "要素代码"
+    },
+    {
+        "label": "xzqdm",
+        "value": "行政区代码"
+    },
+    {
+        "label": "xzqmc",
+        "value": "行政区名称"
+    },
+    {
+        "label": "dcmj",
+        "value": "调查面积"
+    },
+    {
+        "label": "jsmj",
+        "value": "计算面积"
+    },
+    {
+        "label": "mssm",
+        "value": "描述说明"
+    },
+    {
+        "label": "hdmc",
+        "value": "海岛名称"
+    },
+    {
+        "label": "bz",
+        "value": "备注"
+    },
+    {
+        "label": "zldwdm",
+        "value": "坐落单位代码"
+    },
+    {
+        "label": "zldwmc",
+        "value": "坐落单位名称"
+    },
+    {
+        "label": "pdjb",
+        "value": "坡度级别"
+    },
+    {
+        "label": "objectid_1",
+        "value": "编号"
+    },
+    {
+        "label": "shape_length",
+        "value": "图斑周长"
+    },
+    {
+        "label": "shape_area",
+        "value": "图斑面积"
+    },
+    {
+        "label": "tbybh",
+        "value": "图斑预编号"
+    },
+    {
+        "label": "tbbh",
+        "value": "图斑编号"
+    },
+    {
+        "label": "dlbm",
+        "value": "地类编码"
+    },
+    {
+        "label": "dlmc",
+        "value": "地类名称"
+    },
+    {
+        "label": "qsxz",
+        "value": "权属性质"
+    },
+    {
+        "label": "qsdwdm",
+        "value": "权属单位代码"
+    },
+    {
+        "label": "qsdwmc",
+        "value": "权属单位名称"
+    },
+    {
+        "label": "tbmj",
+        "value": "图斑面积"
+    },
+    {
+        "label": "kcdlbm",
+        "value": "扣除地类编码"
+    },
+    {
+        "label": "kcxs",
+        "value": "扣除地类系数"
+    },
+    {
+        "label": "kcmj",
+        "value": "扣除地类面积"
+    },
+    {
+        "label": "tbdlmj",
+        "value": "图斑地类面积"
+    },
+    {
+        "label": "gdlx",
+        "value": "耕地类型"
+    },
+    {
+        "label": "gdpdjb",
+        "value": "耕地坡度级别"
+    },
+    {
+        "label": "xzdwkd",
+        "value": "线状地物宽度"
+    },
+    {
+        "label": "tbxhdm",
+        "value": "图斑细化代码"
+    },
+    {
+        "label": "tbxhmc",
+        "value": "图斑细化名称"
+    },
+    {
+        "label": "zzsxdm",
+        "value": "种植属性代码"
+    },
+    {
+        "label": "zzsxmc",
+        "value": "种植属性名称"
+    },
+    {
+        "label": "gddb",
+        "value": "耕地等别"
+    },
+    {
+        "label": "frdbs",
+        "value": "飞入地标识"
+    },
+    {
+        "label": "czcsxm",
+        "value": "城镇村属性码"
+    },
+    {
+        "label": "sjnf",
+        "value": "数据年份"
+    },
+    {
+        "label": "czclx",
+        "value": "城镇村等用地类型"
+    },
+    {
+        "label": "czcdm",
+        "value": "城镇村代码"
+    },
+    {
+        "label": "czcmc",
+        "value": "城镇村名称"
+    },
+    {
+        "label": "czcmj",
+        "value": "城镇村面积"
+    },
+    {
+        "label": "ttqmj",
+        "value": "推土区面积"
+    },
+    {
+        "label": "zdmj",
+        "value": "占地面积"
+    },
+    {
+        "label": "kd",
+        "value": "宽度"
+    },
+    {
+        "label": "mj",
+        "value": "面积"
+    },
+    {
+        "label": "dlbm",
+        "value": "地类编码"
+    },
+    {
+        "label": "mc",
+        "value": "名称"
+    },
+    {
+        "label": "xmc",
+        "value": "县级行政区名称"
+    },
+    {
+        "label": "jcbh",
+        "value": "监测图斑编号"
+    },
+    {
+        "label": "tblx",
+        "value": "图斑类型"
+    },
+    {
+        "label": "tz",
+        "value": "图斑特征"
+    },
+    {
+        "label": "qsx",
+        "value": "前时相"
+    },
+    {
+        "label": "hsx",
+        "value": "后时相"
+    },
+    {
+        "label": "xzb",
+        "value": "中心点X坐标"
+    },
+    {
+        "label": "yzb",
+        "value": "中心点Y坐标"
+    },
+    {
+        "label": "jcmj",
+        "value": "监测面积"
+    },
+    {
+        "label": "bgdl",
+        "value": "变更后地类"
+    },
+    {
+        "label": "bgfw",
+        "value": "变更范围情况"
+    },
+    {
+        "label": "wbglx",
+        "value": "未变更原因"
+    },
+    {
+        "label": "jbnttbbh",
+        "value": "基本农田图斑编号"
+    },
+    {
+        "label": "jbntmj",
+        "value": "基本农田面积"
+    },
+    {
+        "label": "xzdwmj",
+        "value": "行政单位面积"
+    },
+    {
+        "label": "lxdwmj",
+        "value": "lxdwmj"
+    },
+    {
+        "label": "tkmj",
+        "value": "tkmj"
+    },
+    {
+        "label": "tkxs",
+        "value": "tkxs"
+    },
+    {
+        "label": "zldjdm",
+        "value": "zldjdm"
+    },
+    {
+        "label": "dlbz",
+        "value": "地类标注"
+    },
+    {
+        "label": "jbntlx",
+        "value": "基本农田类型"
+    },
+    {
+        "label": "kclx",
+        "value": "kclx"
+    },
+    {
+        "label": "kcdlbm",
+        "value": "kcdlbm"
+    },
+    {
+        "label": "bl",
+        "value": "bl"
+    },
+    {
+        "label": "dkbh",
+        "value": "dkbh"
+    },
+    {
+        "label": "xmbh",
+        "value": "项目编号"
+    },
+    {
+        "label": "xmmc",
+        "value": "项目名称"
+    },
+    {
+        "label": "pzwh",
+        "value": "批准文号"
+    },
+    {
+        "label": "PZRQ",
+        "value": "批准日期"
+    },
+    {
+        "label": "pzzmj",
+        "value": "pzzmj"
+    },
+    {
+        "label": "pzgyzmj",
+        "value": "pzgyzmj"
+    },
+    {
+        "label": "pzjtzmj",
+        "value": "pzjtzmj"
+    },
+    {
+        "label": "zszmj",
+        "value": "zszmj"
+    },
+    {
+        "label": "dldm",
+        "value": "dldm"
+    },
+    {
+        "label": "xmlx",
+        "value": "项目类型"
+    },
+    {
+        "label": "f_xmbh",
+        "value": "f_xmbh"
+    },
+    {
+        "label": "shape_leng",
+        "value": "图斑周长"
+    },
+    {
+        "label": "ysbh",
+        "value": "ysbh"
+    },
+    {
+        "label": "yswh",
+        "value": "yswh"
+    },
+    {
+        "label": "ysrq",
+        "value": "ysrq"
+    },
+    {
+        "label": "xzgdmj",
+        "value": "xzgdmj"
+    },
+    {
+        "label": "ztz",
+        "value": "ztz"
+    },
+    {
+        "label": "zgm",
+        "value": "zgm"
+    }
+]

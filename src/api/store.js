@@ -9,7 +9,9 @@ const state = {
     BMsg: '',
     CMsg: '',
     DMsg: '',
-    EMsg: ''
+    EMsg: '',
+    ConfigBaseURL:'http://192.168.100.115:8080/'
+    // ConfigBaseURL:'http://127.0.0.1:8080/'
 }
 
 const mutations = {

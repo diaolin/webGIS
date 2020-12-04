@@ -6,6 +6,90 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "6807082",
+      "name": "区县管理icon-45",
+      "font_class": "quxianguanliicon-",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "608275",
+      "name": "地图",
+      "font_class": "ditumap30",
+      "unicode": "e67b",
+      "unicode_decimal": 59003
+    },
+    {
+      "icon_id": "1366301",
+      "name": "地图叠加分析",
+      "font_class": "icon-diejiafenxi",
+      "unicode": "e62a",
+      "unicode_decimal": 58922
+    },
+    {
+      "icon_id": "7564981",
+      "name": "用户管理",
+      "font_class": "yonghuguanli",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "9696741",
+      "name": "数据开放、数据共享、云数据",
+      "font_class": "icon_xinyong_xianxing_jijin-",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "10883862",
+      "name": "地图",
+      "font_class": "ditu",
+      "unicode": "e8bc",
+      "unicode_decimal": 59580
+    },
+    {
+      "icon_id": "14348622",
+      "name": "首页",
+      "font_class": "shouye",
+      "unicode": "e697",
+      "unicode_decimal": 59031
+    },
+    {
+      "icon_id": "14434962",
+      "name": "管理",
+      "font_class": "guanli",
+      "unicode": "e63f",
+      "unicode_decimal": 58943
+    },
+    {
+      "icon_id": "15085062",
+      "name": "系统配置",
+      "font_class": "xitongpeizhi",
+      "unicode": "e7d6",
+      "unicode_decimal": 59350
+    },
+    {
+      "icon_id": "15872020",
+      "name": "数据分析",
+      "font_class": "shujufenxi",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "10793676",
+      "name": "线条颜色_边框操作_jurassic",
+      "font_class": "jurassic_border-linecolor",
+      "unicode": "e6fe",
+      "unicode_decimal": 59134
+    },
+    {
+      "icon_id": "2404489",
+      "name": "填充",
+      "font_class": "tianchong",
+      "unicode": "e649",
+      "unicode_decimal": 58953
+    },
+    {
       "icon_id": "5651560",
       "name": "正确",
       "font_class": "zhengque",

@@ -31,7 +31,6 @@
         },
         mounted() {
             this.searchInitExcel();
-            console.log("landType",landType);
         },
         methods: {
             searchInitExcel() {

@@ -22,10 +22,14 @@
     "ol": "5.3.1",
     "proj4": "^2.6.2",
     "qs": "^6.9.4",
-    "vue": "^2.6.11",
+    "vcolorpicker": "^1.0.3",
+    "vue": "^2.6.12",
+    "vue-color": "^2.7.1",
     "vue-resource": "^1.5.1",
     "vue-router": "^3.4.3",
-    "vuex": "^3.5.1"
+    "vuex": "^3.5.1",
+    "vxe-table": "^3.0.3",
+    "xe-utils": "^3.0.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

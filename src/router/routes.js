@@ -6,6 +6,8 @@ import report_query from '../components/report_query.vue'
 import data_browser from '../components/data_browser.vue'
 import data_analysis from '../components/data_analysis.vue'
 import share_service from '../components/share_service.vue'
+import user_management from '../components/user_management'
+import system_dispose from '../components/system_dispose'
 import loginPage from '../components/loginPage.vue'
 // import data_analysis from '../components/Map.vue'
 import piebarbar from '../components/piebarbar.vue'
@@ -14,6 +16,7 @@ import login from '../components/login.vue'
 import list from '../components/list.vue'
 import Map from '../components/Map.vue'
 import content from '../components/content.vue'
+
 
 // import { component } from "vue/types/umd"
 
@@ -68,6 +71,16 @@ export default [
 				path:'/share_service',
 				component:share_service,
 				name:'share_service'
+			},
+			{
+				path:'/user_management',
+				component:user_management,
+				name:'user_management'
+			},
+			{
+				path:'/system_dispose',
+				component:system_dispose,
+				name:'system_dispose'
 			},
 			{
 				path:'/Map',
